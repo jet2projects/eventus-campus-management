@@ -1,0 +1,353 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050816;
+  --surface: #0B1120;
+  --card: #111827;
+  --text: #F8FAFC;
+
+  --accent: #8BFF98;
+  --accent-2: #4ADE80;
+
+  --border: rgba(139,255,152,0.14);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-2));
+  border-radius: 20px;
+}
+
+/* Selection */
+
+::selection {
+  background: rgba(139,255,152,0.22);
+  color: #fff;
+}
+
+/* Typography */
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -4px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass */
+
+.glass {
+  background: rgba(11,17,32,0.65);
+  -webkit-backdrop-filter: blur(20px);
+backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+/* Cards */
+
+.premium-card {
+  background: linear-gradient(135deg, rgba(17,24,39,0.92), rgba(11,17,32,0.82));
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139,255,152,0.04),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: 0.6s;
+}
+
+.premium-card:hover::before {
+  transform: translateX(100%);
+}
+
+.premium-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(139,255,152,0.32);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.35),
+    0 0 30px rgba(139,255,152,0.08);
+}
+
+/* Buttons */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04110A;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 34px rgba(139,255,152,0.32);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(139,255,152,0.32);
+  color: #F8FAFC;
+  border-radius: 999px;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(139,255,152,0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Inputs */
+
+.premium-input {
+  width: 100%;
+  background: rgba(17,24,39,0.82);
+  border: 1px solid rgba(139,255,152,0.16);
+  border-radius: 14px;
+  padding: 14px 16px;
+  color: #F8FAFC;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.premium-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(139,255,152,0.1);
+}
+
+.premium-input::placeholder {
+  color: rgba(248,250,252,0.35);
+}
+
+/* Tags */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(139,255,152,0.08);
+  border: 1px solid rgba(139,255,152,0.14);
+  color: rgba(248,250,252,0.72);
+  font-size: 12px;
+  transition: all 0.25s ease;
+}
+
+.tag:hover,
+.tag.active {
+  background: rgba(139,255,152,0.16);
+  border-color: rgba(139,255,152,0.35);
+  color: var(--accent);
+}
+
+/* Badges */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge-green {
+  background: rgba(74,222,128,0.14);
+  color: var(--accent);
+  border: 1px solid rgba(74,222,128,0.24);
+}
+
+.badge-blue {
+  background: rgba(96,165,250,0.14);
+  color: #60A5FA;
+  border: 1px solid rgba(96,165,250,0.24);
+}
+
+.badge-red {
+  background: rgba(248,113,113,0.14);
+  color: #F87171;
+  border: 1px solid rgba(248,113,113,0.24);
+}
+
+/* Skeleton */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(17,24,39,0.8) 25%,
+    rgba(31,41,55,0.5) 50%,
+    rgba(17,24,39,0.8) 75%
+  );
+
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Floating particles */
+
+@keyframes particle {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particle linear infinite;
+  opacity: 0;
+}
+
+/* Floating */
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+/* Divider */
+
+.accent-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139,255,152,0.3),
+    transparent
+  );
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: flex !important;
+  }
+}
+
+.show-mobile {
+  display: none;
+}
+input,
+textarea,
+select {
+  color: #F8FAFC !important;
+  background: rgba(17, 24, 39, 0.92) !important;
+  border-color: rgba(139, 255, 152, 0.25) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(248, 250, 252, 0.45) !important;
+}
+
+label {
+  color: rgba(248, 250, 252, 0.75) !important;
+}
+
+button {
+  color: inherit;
+}
