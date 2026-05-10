@@ -56,7 +56,7 @@ app.use('/api/events', require('./routes/events'))
 app.use('/api/bookings', require('./routes/bookings'))
 app.use('/api/payments', require('./routes/payments'))
 app.use('/api/admin', require('./routes/admin'))
-app.use('/api/upload', require('./routes/upload'))
+
 
 const PORT = process.env.PORT || 5000
 
