@@ -1,91 +1,74 @@
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const path = require('path');
-require('dotenv').config();
 
-// Route imports
-const authRoutes = require('./routes/auth');
-const eventRoutes = require('./routes/events');
-const bookingRoutes = require('./routes/bookings');
-const paymentRoutes = require('./routes/payments');
-const userRoutes = require('./routes/users');
-const adminRoutes = require('./routes/admin');
-const uploadRoutes = require('./routes/uploads');
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
+const dotenv = require('dotenv')
+const http = require('http')
+const { Server } = require('socket.io')
 
-const { errorHandler } = require('./middleware/errorHandler');
-const { connectDB } = require('./config/db');
+dotenv.config()
 
-const app = express();
-const server = http.createServer(app);
+const app = express()
+const server = http.createServer(app)
 
-// Socket.io setup
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST'],
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
-});
+})
 
-// Make io accessible to routes
-app.set('io', io);
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://eventus-campus-management-ynkc-6evp4q7ev-jet2projects-projects.vercel.app',
+]
 
-// Connect Database
-connectDB();
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true)
 
-// Middleware
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true,
-}));
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.includes('.vercel.app')
+      ) {
+        return callback(null, true)
+      }
 
-// Static files (uploads)
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+      return callback(new Error('Not allowed by CORS'))
+    },
+    credentials: true,
+  })
+)
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Campus Event API is running 🔥', timestamp: new Date() });
-});
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/bookings', bookingRoutes);
-app.use('/api/payments', paymentRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/upload', uploadRoutes);
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('✅ MongoDB Connected')
+  })
+  .catch(err => {
+    console.log('❌ MongoDB connection error:', err.message)
+  })
 
-// Socket.io events
-io.on('connection', (socket) => {
-  console.log(`⚡ User connected: ${socket.id}`);
+app.get('/', (req, res) => {
+  res.send('EVENTUS Backend Running 🚀')
+})
 
-  socket.on('join_event', (eventId) => {
-    socket.join(`event_${eventId}`);
-    console.log(`User joined event room: event_${eventId}`);
-  });
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/events', require('./routes/events'))
+app.use('/api/bookings', require('./routes/bookings'))
+app.use('/api/payments', require('./routes/payments'))
+app.use('/api/admin', require('./routes/admin'))
+app.use('/api/upload', require('./routes/upload'))
 
-  socket.on('leave_event', (eventId) => {
-    socket.leave(`event_${eventId}`);
-  });
+const PORT = process.env.PORT || 5000
 
-  socket.on('disconnect', () => {
-    console.log(`User disconnected: ${socket.id}`);
-  });
-});
-
-// Error handler (must be last)
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌀 Socket.io ready`);
-  console.log(`🔥 Chakra energy: MAXIMUM`);
-});
-
-module.exports = { app, io };
+  console.log(`🚀 Server running on port ${PORT}`)
+  console.log('🌀 Socket.io ready')
+  console.log('🔥 Chakra energy: MAXIMUM')
+})
