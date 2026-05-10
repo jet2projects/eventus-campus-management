@@ -119,7 +119,7 @@ npm run dev
 Backend runs on:
 
 ```bash
-http://localhost:5000
+https://eventus-campus-management-1.onrender.com
 ```
 
 ---

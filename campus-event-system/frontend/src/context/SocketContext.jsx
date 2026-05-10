@@ -9,7 +9,7 @@ export function SocketProvider({ children }) {
   const [liveUpdates, setLive] = useState([])
   useEffect(() => {
     if (!isAuthenticated) return
-    ref.current = io('http://localhost:5000', { transports:['websocket'] })
+    ref.current = io('https://eventus-campus-management-1.onrender.com', { transports:['websocket'] })
     ref.current.on('connect', () => setConnected(true))
     ref.current.on('disconnect', () => setConnected(false))
     ;['new_event','booking_update','payment_success','event_reviewed'].forEach(e =>
