@@ -1,191 +1,236 @@
-# ⚡ Campus Event Management System —cinematic futuristic event platform
+# ⚡ EVENTUS — Premium Campus Event Management Platform
 
-A full-stack campus event management platform with a cinematic Naruto-anime UI. Built with React + Vite, Node.js + Express, and MongoDB.
+EVENTUS is a modern full-stack campus event management platform built for colleges and universities to organize, manage, and experience events through a premium futuristic interface.
 
----
-
-## 🗂️ Project Structure
-
-```
-campus-event-system/
-├── frontend/          # React + Vite + Tailwind + Framer Motion
-└── backend/           # Node.js + Express + MongoDB
-```
+Designed with a cinematic dark UI, real-time features, analytics dashboards, and role-based management systems.
 
 ---
 
-## 🚀 Quick Start
+# 🚀 Features
 
-### Prerequisites
-- Node.js 18+
-- MongoDB (local or Atlas)
-- npm or yarn
+## 👨‍🎓 Student Portal
+- Browse and discover campus events
+- Search and filter events
+- Register for free & paid events
+- QR ticket generation
+- Booking history and status tracking
+- Cancel bookings
+- Real-time event updates
 
 ---
 
-### 1. Backend Setup
+## 👨‍🏫 Staff Portal
+- Create and manage events
+- Upload event banners
+- Track registrations
+- View event analytics
+- Manage attendees
+
+---
+
+## 👑 Admin Dashboard
+- Approve or reject events
+- Manage users and permissions
+- Feature/unfeature events
+- Advanced analytics dashboard
+- Revenue and booking insights
+- Real-time monitoring system
+
+---
+
+# 🧱 Tech Stack
+
+## Frontend
+| Technology | Purpose |
+|---|---|
+| React 18 | Frontend Framework |
+| Vite | Fast Build Tool |
+| Tailwind CSS | Styling |
+| Framer Motion | Animations |
+| GSAP | Advanced Motion Effects |
+| React Router v6 | Routing |
+| Axios | API Requests |
+| Recharts | Analytics Charts |
+| Socket.io Client | Real-time Updates |
+
+---
+
+## Backend
+| Technology | Purpose |
+|---|---|
+| Node.js | Runtime |
+| Express.js | Backend Framework |
+| MongoDB | Database |
+| Mongoose | ODM |
+| JWT | Authentication |
+| bcryptjs | Password Security |
+| Socket.io | Real-time Communication |
+| Razorpay | Payment Integration |
+| Nodemailer | Email Notifications |
+| Multer | File Uploads |
+
+---
+
+# 📂 Project Structure
 
 ```bash
-cd backend
-
-# Install dependencies
-npm install
-
-# Copy env and configure
-cp .env.example .env
-# Edit .env with your MongoDB URI, JWT secret, Razorpay keys, and email credentials
-
-
-
-
-# Start development server
-npm run dev
+campus-event-system/
+├── frontend/
+├── backend/
+└── README.md
 ```
-
-Backend runs on: `http://localhost:5000`
 
 ---
 
-### 2. Frontend Setup
+# ⚙️ Installation
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/jet2projects/eventus-campus-management.git
+```
+
+---
+
+## 2️⃣ Install Frontend
 
 ```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-Frontend runs on: `http://localhost:3000`
+Frontend runs on:
+
+```bash
+http://localhost:3000
+```
 
 ---
 
+## 3️⃣ Install Backend
 
-## 🎮 Features
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-### Student
-- Browse & search events with filters
-- Book free and paid tickets
-- Razorpay payment integration
-- QR code ticket generation & download
-- View booking history with status
-- Cancel bookings
+Backend runs on:
 
-### Staff
-- Create & manage events
-- Upload event banner images
-- Track bookings per event
-- View event analytics
-
-### Admin
-- Approve / reject events with feedback
-- Manage all users (activate/deactivate, change roles)
-- Feature/unfeature events
-- Full analytics dashboard (charts, revenue, trends)
-- Real-time updates via WebSocket
+```bash
+http://localhost:5000
+```
 
 ---
 
-## 🧱 Tech Stack
+# 🔐 Environment Variables
 
-### Frontend
-| Tool | Purpose |
-|------|---------|
-| React 18 | UI framework |
-| Vite | Build tool |
-| Tailwind CSS | Utility styling |
-| Framer Motion | Animations |
-| GSAP | Complex animations |
-| React Router v6 | Routing |
-| Axios | HTTP client |
-| Recharts | Analytics charts |
-| Socket.io-client | Real-time updates |
-| React QR Code | QR ticket generation |
-| React Hot Toast | Notifications |
-
-### Backend
-| Tool | Purpose |
-|------|---------|
-| Node.js + Express | Server |
-| MongoDB + Mongoose | Database |
-| JWT | Authentication |
-| bcryptjs | Password hashing |
-| Socket.io | Real-time events |
-| Razorpay | Payment gateway |
-| Nodemailer | Email notifications |
-| QRCode | QR code generation |
-| Multer | File uploads |
-
----
-
-## 📡 API Endpoints
-
-### Auth
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `GET  /api/auth/me`
-- `PUT  /api/auth/me`
-- `PUT  /api/auth/change-password`
-
-### Events
-- `GET  /api/events`
-- `GET  /api/events/featured`
-- `GET  /api/events/:id`
-- `POST /api/events` *(staff/admin)*
-- `PUT  /api/events/:id` *(staff/admin)*
-- `DELETE /api/events/:id` *(staff/admin)*
-- `GET  /api/events/:id/analytics` *(staff/admin)*
-
-### Bookings
-- `POST /api/bookings`
-- `GET  /api/bookings/my`
-- `GET  /api/bookings/:id`
-- `PUT  /api/bookings/:id/cancel`
-- `GET  /api/bookings/:id/ticket`
-- `PUT  /api/bookings/:id/checkin` *(staff/admin)*
-
-### Payments
-- `POST /api/payments/create-order`
-- `POST /api/payments/verify`
-
-### Admin
-- `GET  /api/admin/analytics`
-- `GET  /api/admin/users`
-- `PUT  /api/admin/users/:id/toggle`
-- `PUT  /api/admin/users/:id/role`
-- `GET  /api/admin/events`
-- `PUT  /api/admin/events/:id/review`
-- `PUT  /api/admin/events/:id/feature`
-
----
-
-## 🔧 Environment Variables
+Create `.env` inside backend folder.
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/campus_events
-JWT_SECRET=your_jwt_secret
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_secret
 JWT_EXPIRE=7d
-RAZORPAY_KEY_ID=rzp_test_xxx
-RAZORPAY_KEY_SECRET=xxx
+
+RAZORPAY_KEY_ID=your_key
+RAZORPAY_KEY_SECRET=your_secret
+
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
-EMAIL_USER=your@email.com
-EMAIL_PASS=app_password
+EMAIL_USER=your_email
+EMAIL_PASS=your_password
+
 CLIENT_URL=http://localhost:3000
 ```
 
 ---
 
-## 🎨 Design Theme
+# 📡 API Modules
 
-- **Style**: Naruto anime-inspired dark UI
-- **Colors**: `#FF6A00` (chakra orange), `#FFB347` (amber), `#FACC15` (gold), `#060B14` (dark)
-- **Fonts**: Bebas Neue (headings), Exo 2 (UI), DM Sans (body)
-- **Effects**: Particle background, kanji overlays, glassmorphism, neon borders, framer motion transitions
+## Authentication
+- Login
+- Register
+- Change Password
+- User Profile
+
+## Events
+- Create Events
+- Event Analytics
+- Featured Events
+- Event Registration
+
+## Bookings
+- Ticket Generation
+- QR Validation
+- Booking History
+
+## Admin
+- User Management
+- Event Approval
+- Revenue Analytics
+- Dashboard Controls
 
 ---
 
-## ⚡ Believe it!
+# 🎨 UI Design
+
+- Premium futuristic dark theme
+- Glassmorphism effects
+- Neon green accent system
+- Responsive dashboard layouts
+- Animated transitions
+- Real-time visual feedback
+- Modern SaaS-inspired interface
+
+---
+
+# 📈 Future Improvements
+
+- AI event recommendations
+- Attendance heatmaps
+- Mobile application
+- Push notifications
+- Advanced reporting
+- Multi-college support
+
+---
+
+# 🖥️ Screenshots
+
+## Homepage
+_Add your homepage screenshot here_
+
+## Admin Dashboard
+_Add your admin dashboard screenshot here_
+
+## Login Page
+_Add your login page screenshot here_
+
+---
+
+# 👨‍💻 Developer
+
+**Hari Priyan**
+
+GitHub:
+https://github.com/jet2projects
+
+---
+
+# ⭐ Project Status
+
+✅ Active Development  
+✅ Full Stack  
+✅ Responsive UI  
+✅ Real-time Features  
+✅ Authentication System  
+✅ Admin Dashboard  
+✅ MongoDB Integration
+
+---
+
+# 📜 License
+
+This project is developed for educational and portfolio purposes.
