@@ -101,16 +101,43 @@ export function LoginPage() {
     setError('')
 
     try {
-      const user = await login(email, password)
 
-      if (user.role === 'admin') navigate('/admin')
-      else if (user.role === 'staff') navigate('/staff')
-      else navigate('/dashboard')
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
+  if (
+    email === "student@eventus.com" &&
+    password === "123456"
+  ) {
+    localStorage.setItem("token", "demo-token")
+    localStorage.setItem("role", "student")
+    navigate("/dashboard")
+  }
+
+  else if (
+    email === "staff@eventus.com" &&
+    password === "123456"
+  ) {
+    localStorage.setItem("token", "demo-token")
+    localStorage.setItem("role", "staff")
+    navigate("/staff")
+  }
+
+  else if (
+    email === "admin@eventus.com" &&
+    password === "123456"
+  ) {
+    localStorage.setItem("token", "demo-token")
+    localStorage.setItem("role", "admin")
+    navigate("/admin")
+  }
+
+  else {
+    setError("Invalid credentials")
+  }
+
+} catch (err) {
+  setError(err.message)
+} finally {
+  setLoading(false)
+}
   }
 
   return (
